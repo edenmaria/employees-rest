@@ -23,14 +23,9 @@ public class EmployeeService implements IEmployeeService {
 	}
 	@Override
 	public synchronized boolean addEmployee(Employee employee){
-	        List<Employee> list = employeeDao.findByName(employee.getName()); 	
-                if (list.size() > 0) {
-    	           return false;
-                } else {
-    	        employeeDao.save(employee);
-    	        return true;
-       }
-	}
+	    employeeDao.save(employee);
+    	return true;
+    }
 	@Override
 	public void updateEmployee(Employee employee) {
 		employeeDao.save(employee);
