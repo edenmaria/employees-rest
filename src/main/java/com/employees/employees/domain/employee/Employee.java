@@ -32,7 +32,7 @@ public class Employee implements Serializable {
   @Column(name="surname")
   private String surname;
 
-  @Column(name="id_number", unique=true)
+  @Column(name="id_number")
   private String id_number;
 
   @ManyToMany(cascade = CascadeType.ALL)

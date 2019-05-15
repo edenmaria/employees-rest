@@ -40,7 +40,6 @@ public class WorkShiftController {
 
 	@PostMapping("workshift")
 	public ResponseEntity<Void> addWorkShift(@RequestBody WorkShift workshift, UriComponentsBuilder builder) {
-                //System.out.println("El error es:_" + workshift.getHoraInicio());
                 boolean flag = workshiftService.addWorkShift(workshift);
                 if (flag == false) {
         	        return new ResponseEntity<Void>(HttpStatus.CONFLICT);
