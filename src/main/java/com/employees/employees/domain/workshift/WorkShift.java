@@ -13,6 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import com.employees.employees.domain.employee.Employee;
 
@@ -28,10 +29,12 @@ public class WorkShift implements Serializable {
     private Long id;
 
     @Temporal(TemporalType.TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     @Column(name="hora_inicio")
     private Date hora_inicio;
 
     @Temporal(TemporalType.TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     @Column(name="hora_fin")
     private Date hora_fin;
 
