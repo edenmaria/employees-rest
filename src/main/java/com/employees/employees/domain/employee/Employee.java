@@ -36,10 +36,19 @@ public class Employee implements Serializable {
   private String id_number;
 
   @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "workshift_employee", 
+  @JoinTable(name = "workshift_employee",
     joinColumns = @JoinColumn(name = "workshift_id", referencedColumnName = "id"), 
     inverseJoinColumns = @JoinColumn(name = "employee_id", referencedColumnName = "id"))
   private List<WorkShift> workshifts;
+
+  public List<WorkShift> getWorkShifts() {
+    return workshifts;
+  }
+
+  public void setWorkShifts(List<WorkShift> workshifts) {
+       this.workshifts = workshifts;
+  }
+  
 
   public Long getId() {
   return id;

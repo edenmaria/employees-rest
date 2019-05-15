@@ -4,12 +4,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.employees.employees.domain.employee.EmployeeDao;
-
+import com.employees.employees.domain.workshift.WorkShiftDao;
+import com.employees.employees.domain.workshift.WorkShift;
 
 @Service
 public class EmployeeService implements IEmployeeService {
 	@Autowired
 	private EmployeeDao employeeDao;
+	private WorkShiftDao workshiftDao;
 	@Override
 	public Employee getEmployeeById(Long id) {
 		Employee obj = employeeDao.findById(id).get(0);
@@ -34,4 +36,10 @@ public class EmployeeService implements IEmployeeService {
 	public void deleteEmployee(Long id) {
 		employeeDao.delete(getEmployeeById(id));
 	}
+
+	@Override
+	public synchronized boolean addEmployeeWorkshift(Employee employee){
+	    employeeDao.save(employee);
+    	return true;
+    }
 } 

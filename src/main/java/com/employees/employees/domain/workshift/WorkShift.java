@@ -52,7 +52,7 @@ public class WorkShift implements Serializable {
       this.id = id;
     }
       
-    public Date getHoraInicio() {
+    /*public Date getHoraInicio() {
       return hora_inicio;
     }
       
@@ -67,7 +67,7 @@ public class WorkShift implements Serializable {
     public void setHoraFin(Date hora_fin) {
       this.hora_fin = hora_fin;
     }
-      
+      */
     public String getDias() {
       return dias;
     }
