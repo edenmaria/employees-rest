@@ -8,6 +8,7 @@ import com.employees.employees.domain.workshift.WorkShiftDao;
 
 @Service
 public class WorkShiftService implements IWorkShiftService {
+	
 	@Autowired
 	private WorkShiftDao workShiftDao;
 	@Override
@@ -23,13 +24,9 @@ public class WorkShiftService implements IWorkShiftService {
 	}
 	@Override
 	public synchronized boolean addWorkShift(WorkShift  workshift){
-	        // List<WorkShift> list =  workShiftDao.findByName(workshift.getName()); 	
-            //     if (list.size() > 0) {
-    	    //        return false;
-            //     } else {
-    	         workShiftDao.save(workshift);
-    	        return true;
-    //    }
+		workShiftDao.save(workshift);
+		return true;
+
 	}
 	@Override
 	public void updateWorkShift(WorkShift workshift) {
@@ -38,5 +35,14 @@ public class WorkShiftService implements IWorkShiftService {
 	@Override
 	public void deleteWorkShift(Long id) {
 		 workShiftDao.delete(getWorkShiftById(id));
+	}
+
+	@Override
+	//public List<WorkShift> getWorkShiftByFilter(String dias, String hora_inicio, String hora_fin){
+	public List<WorkShift> getWorkShiftByFilter(String dias, String hora_inicio){
+		List<WorkShift> list = new ArrayList<>();
+		//workShiftDao.findWorkShift(dias,hora_inicio,hora_fin).forEach(e -> list.add(e));
+		 workShiftDao.findWorkShift(dias,hora_inicio).forEach(e -> list.add(e));
+		return list;
 	}
 } 

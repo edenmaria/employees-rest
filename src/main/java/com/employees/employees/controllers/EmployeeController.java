@@ -30,17 +30,16 @@ public class EmployeeController {
 	@Autowired
 	private IEmployeeService employeeService;
 	
-	
-	@GetMapping("employees/{id}")
-	public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-		Employee employee = employeeService.getEmployeeById(id);
-		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-	}
-
 	@GetMapping("employees")
 	public ResponseEntity<List<Employee>> getAllEmployees() {
 		List<Employee> list = employeeService.getAllEmployees();
 		return new ResponseEntity<List<Employee>>(list, HttpStatus.OK);
+	}	
+
+	@GetMapping("employees/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
+		Employee employee = employeeService.getEmployeeById(id);
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 
 	@PostMapping("employees")
@@ -65,6 +64,12 @@ public class EmployeeController {
 		employeeService.deleteEmployee(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}	
+
+	@GetMapping("employees-workshifts/{id_number}")
+	public ResponseEntity<Employee> getEmployeeByIdNumber(@PathVariable("id_number") String id_number) {
+		Employee employee = employeeService.getEmployeeByIdNumber(id_number);
+		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
+	}
 
 	@PostMapping("employees-workshifts")
 	public ResponseEntity<String> addEmployeeWorkshift(@RequestBody EmployeeWorkshift employeeworkshift, UriComponentsBuilder builder) {
@@ -92,7 +97,7 @@ public class EmployeeController {
 			}
 		}
 		catch(RuntimeException e){
-			return new ResponseEntity<String>("Ocurrio un error, verifique los datos ingresados", HttpStatus.OK);
+			return new ResponseEntity<String>("Ocurrio un error, verifique los datos ingresados", HttpStatus.BAD_REQUEST);
 		}	
 	}
 
@@ -121,7 +126,7 @@ public class EmployeeController {
 				}
 		}
 		catch(RuntimeException e){
-			return new ResponseEntity<String>("Ocurrio un error, verifique los datos ingresados", HttpStatus.OK);
+			return new ResponseEntity<String>("Ocurrio un error, verifique los datos ingresados", HttpStatus.BAD_REQUEST);
 		}	
 	}	
 

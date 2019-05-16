@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -60,4 +61,12 @@ public class WorkShiftController {
 		workshiftService.deleteWorkShift(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}	
+
+	@GetMapping("workshifts-filters/")
+	//public ResponseEntity<List<WorkShift>> getWorkShiftById(@PathVariable("dias") String dias, @PathVariable("hora_inicio") String hora_inicio, @PathVariable("hora_fin") String hora_fin) {
+	public ResponseEntity<List<WorkShift>> getWorkShiftById(@RequestParam String dias, String hora_inicio) {
+		//List<WorkShift> list = workshiftService.getWorkShiftByFilter(dias/*,hora_inicio,hora_fin*/);
+		List<WorkShift> list = workshiftService.getWorkShiftByFilter(dias,hora_inicio);
+		return new ResponseEntity<List<WorkShift>>(list, HttpStatus.OK);
+	}
 } 

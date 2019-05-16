@@ -29,7 +29,7 @@ public class WorkShift implements Serializable {
     private Long id;
 
     @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = JsonFormat.DEFAULT_TIMEZONE)
     @Column(name="hora_inicio")
     private Date hora_inicio;
 
@@ -51,23 +51,7 @@ public class WorkShift implements Serializable {
     public void setId(Long id) {
       this.id = id;
     }
-      
-    /*public Date getHoraInicio() {
-      return hora_inicio;
-    }
-      
-    public void setHoraInicio(Date hora_inicio) {
-      this.hora_inicio = hora_inicio;
-    }
-      
-     public Date getHoraFin() {
-      return hora_fin;
-    }
-      
-    public void setHoraFin(Date hora_fin) {
-      this.hora_fin = hora_fin;
-    }
-      */
+
     public String getDias() {
       return dias;
     }
@@ -75,4 +59,6 @@ public class WorkShift implements Serializable {
     public void setDias(String dias) {
       this.dias = dias;
     }
+
+    
   }

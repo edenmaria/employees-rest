@@ -8,5 +8,6 @@ public interface IEmployeeService {
      boolean addEmployee(Employee employee);
      void updateEmployee(Employee employee);
      void deleteEmployee(Long id);
+     Employee getEmployeeByIdNumber(String id_number);
      boolean addEmployeeWorkshift(Employee employee);
 }
