@@ -25,6 +25,7 @@ import com.employees.employees.domain.workshift.WorkShiftDao;
 @RequestMapping("api")
 public class EmployeeController {
 
+ public int flag= 0;
 	
 	@Autowired
 	private IEmployeeService employeeService;
@@ -66,18 +67,65 @@ public class EmployeeController {
 	}	
 
 	@PostMapping("employees-workshifts")
-	public ResponseEntity<Employee> addEmployeeWorkshift(@RequestBody EmployeeWorkshift employeeworkshift, UriComponentsBuilder builder) {
-        long id_employee = employeeworkshift.getIdEmployee();
-		long id_workshift = employeeworkshift.getIdWorkshift();
-		Employee employee = employeeService.getEmployeeById(id_employee);
-		WorkShift workshift = workShiftDao.findById(id_workshift).get(0);
-		List<WorkShift> list = new ArrayList<>();
-		list=employee.getWorkShifts();
-		list.add(workshift);
-		employee.setWorkShifts(list);
-		employeeService.addEmployeeWorkshift(employee);
-		return new ResponseEntity<Employee>(employee , HttpStatus.OK);
+	public ResponseEntity<String> addEmployeeWorkshift(@RequestBody EmployeeWorkshift employeeworkshift, UriComponentsBuilder builder) {
+		try {
+			long id_employee = employeeworkshift.getIdEmployee();
+			long id_workshift = employeeworkshift.getIdWorkshift();
+			Employee employee = employeeService.getEmployeeById(id_employee);
+			WorkShift workshift = workShiftDao.findById(id_workshift).get(0);
+			List<WorkShift> list = new ArrayList<>();
+			flag=0;
+			list=employee.getWorkShifts();
+			list.forEach(e -> {
+       							if(e.getId() == workshift.getId()) {
+									 flag=1;
+        						}
+    						});
+			if(flag==0){
+				list.add(workshift);
+				employee.setWorkShifts(list);
+				employeeService.addEmployeeWorkshift(employee);
+				return new ResponseEntity<String>("Exitoso" , HttpStatus.OK);
+			}
+			else{
+				return new ResponseEntity<String>("El horario ya esta asignado" , HttpStatus.OK);
+			}
+		}
+		catch(RuntimeException e){
+			return new ResponseEntity<String>("Ocurrio un error, verifique los datos ingresados", HttpStatus.OK);
+		}	
 	}
+
+	@DeleteMapping("employees-workshifts/{id_employee}/{id_workshift}")
+	public ResponseEntity<String> deleteEmployeeWorkshift(@PathVariable("id_employee") Long id_employee, @PathVariable("id_workshift") Long id_workshift) {
+		try{
+			Employee employee = employeeService.getEmployeeById(id_employee);
+			WorkShift workshift = workShiftDao.findById(id_workshift).get(0);
+			List<WorkShift> list = new ArrayList<>();
+			flag=0;
+				list=employee.getWorkShifts();
+				list.forEach(e -> {
+									if(e.getId() == workshift.getId()) {
+										System.out.println("El error es:_" + workshift.getId());
+										flag=1;
+									}
+								});
+				if(flag==1){
+					list.remove(workshift);
+					employee.setWorkShifts(list);
+					employeeService.addEmployeeWorkshift(employee);
+					return new ResponseEntity<String>("Exitoso" , HttpStatus.OK);
+				}
+				else{
+					return new ResponseEntity<String>("El horario no esta asignado" , HttpStatus.OK);
+				}
+		}
+		catch(RuntimeException e){
+			return new ResponseEntity<String>("Ocurrio un error, verifique los datos ingresados", HttpStatus.OK);
+		}	
+	}	
+
+
 	@Autowired
 	WorkShiftDao workShiftDao;
 } 
