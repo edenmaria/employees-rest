@@ -29,12 +29,12 @@ public class WorkShift implements Serializable {
     private Long id;
 
     @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = JsonFormat.DEFAULT_TIMEZONE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "America/Caracas")
     @Column(name="hora_inicio")
     private Date hora_inicio;
 
     @Temporal(TemporalType.TIME)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "America/Caracas")
     @Column(name="hora_fin")
     private Date hora_fin;
 
