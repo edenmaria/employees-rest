@@ -28,9 +28,10 @@ public class EmployeeController {
 	
 	@Autowired
 	private IEmployeeService employeeService;
+	@Autowired
 	private IWorkShiftService workshiftService;
 	
-	@GetMapping("employee/{id}")
+	@GetMapping("employees/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
 		Employee employee = employeeService.getEmployeeById(id);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
@@ -42,7 +43,7 @@ public class EmployeeController {
 		return new ResponseEntity<List<Employee>>(list, HttpStatus.OK);
 	}
 
-	@PostMapping("employee")
+	@PostMapping("employees")
 	public ResponseEntity<Void> addEmployee(@RequestBody Employee employee, UriComponentsBuilder builder) {
                 boolean flag = employeeService.addEmployee(employee);
                 if (flag == false) {
@@ -53,13 +54,13 @@ public class EmployeeController {
                 return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@PutMapping("employee")
+	@PutMapping("employees")
 	public ResponseEntity<Employee> updateEmployee(@RequestBody Employee employee) {
 		employeeService.updateEmployee(employee);
 		return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	}
 
-	@DeleteMapping("employee/{id}")
+	@DeleteMapping("employees/{id}")
 	public ResponseEntity<Void> deleteEmployee(@PathVariable("id") Long id) {
 		employeeService.deleteEmployee(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
@@ -77,11 +78,10 @@ public class EmployeeController {
 	// 	return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 	// }
 
-	@PostMapping("employeeWorkshift")
+	@PostMapping("employees-workshifts")
 	public ResponseEntity<Employee> addEmployeeWorkshift(@RequestBody EmployeeWorkshift employeeworkshift, UriComponentsBuilder builder) {
         long id_employee = employeeworkshift.getIdEmployee();
 		long id_workshift = employeeworkshift.getIdWorkshift();
-		//long x=15;
 		System.out.println("El error es:_" + id_workshift); 
 		Employee employee = employeeService.getEmployeeById(id_employee);
 		//WorkShift workshift = workshiftService.getWorkShiftById(x);
