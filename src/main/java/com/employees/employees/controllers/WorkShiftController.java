@@ -26,7 +26,7 @@ public class WorkShiftController {
 	@Autowired
 	private IWorkShiftService workshiftService;
 	
-	@GetMapping("workshift/{id}")
+	@GetMapping("workshifts/{id}")
 	public ResponseEntity<WorkShift> getWorkShiftById(@PathVariable("id") Long id) {
 		WorkShift workshift = workshiftService.getWorkShiftById(id);
 		return new ResponseEntity<WorkShift>(workshift, HttpStatus.OK);
@@ -38,7 +38,7 @@ public class WorkShiftController {
 		return new ResponseEntity<List<WorkShift>>(list, HttpStatus.OK);
 	}
 
-	@PostMapping("workshift")
+	@PostMapping("workshifts")
 	public ResponseEntity<Void> addWorkShift(@RequestBody WorkShift workshift, UriComponentsBuilder builder) {
                 boolean flag = workshiftService.addWorkShift(workshift);
                 if (flag == false) {
@@ -49,13 +49,13 @@ public class WorkShiftController {
                 return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 	}
 
-	@PutMapping("workshift")
+	@PutMapping("workshifts")
 	public ResponseEntity<WorkShift> updateWorkShift(@RequestBody WorkShift workshift) {
 		workshiftService.updateWorkShift(workshift);
 		return new ResponseEntity<WorkShift>(workshift, HttpStatus.OK);
 	}
 
-	@DeleteMapping("workshift/{id}")
+	@DeleteMapping("workshifts/{id}")
 	public ResponseEntity<Void> deleteWorkShift(@PathVariable("id") Long id) {
 		workshiftService.deleteWorkShift(id);
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);

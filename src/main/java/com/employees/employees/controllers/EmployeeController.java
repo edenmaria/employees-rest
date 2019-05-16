@@ -18,8 +18,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.employees.employees.domain.employee.Employee;
 import com.employees.employees.domain.workshift.WorkShift;
 import com.employees.employees.domain.employee.IEmployeeService;
-import com.employees.employees.domain.workshift.IWorkShiftService;
 import com.employees.employees.domain.employee.EmployeeWorkshift;
+import com.employees.employees.domain.workshift.WorkShiftDao;
 
 @Controller
 @RequestMapping("api")
@@ -28,8 +28,7 @@ public class EmployeeController {
 	
 	@Autowired
 	private IEmployeeService employeeService;
-	@Autowired
-	private IWorkShiftService workshiftService;
+	
 	
 	@GetMapping("employees/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
@@ -66,33 +65,19 @@ public class EmployeeController {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}	
 
-
-	// @PostMapping("employeeWorkshift")
-	// public ResponseEntity<Employee> addEmployeeWorkshift(@JsonArg("/id_employee") Long id_employee, ("/id_workshift") Long id_workshift, UriComponentsBuilder builder) {
-    //     Employee employee = employeeService.getEmployeeById(id_employee);
-	// 	WorkShift workshift = workshiftService.getWorkShiftById(id_workshift);
-	// 	List<WorkShift> list = new ArrayList<>();
-	// 	list.add(workshift);
-	// 	employee.setWorkShifts(list);
-	// 	employeeService.addEmployeeWorkshift(employee);
-	// 	return new ResponseEntity<Employee>(employee, HttpStatus.OK);
-	// }
-
 	@PostMapping("employees-workshifts")
 	public ResponseEntity<Employee> addEmployeeWorkshift(@RequestBody EmployeeWorkshift employeeworkshift, UriComponentsBuilder builder) {
         long id_employee = employeeworkshift.getIdEmployee();
 		long id_workshift = employeeworkshift.getIdWorkshift();
-		System.out.println("El error es:_" + id_workshift); 
 		Employee employee = employeeService.getEmployeeById(id_employee);
-		//WorkShift workshift = workshiftService.getWorkShiftById(x);
-		//WorkShift workshift = workshiftService.getWorkShiftById(x);
-		WorkShift workshift = new WorkShift();
-		//workshift = workshiftService.getWorkShiftById(id_workshift);
-		workshift.setId(id_workshift);
+		WorkShift workshift = workShiftDao.findById(id_workshift).get(0);
 		List<WorkShift> list = new ArrayList<>();
+		list=employee.getWorkShifts();
 		list.add(workshift);
 		employee.setWorkShifts(list);
 		employeeService.addEmployeeWorkshift(employee);
 		return new ResponseEntity<Employee>(employee , HttpStatus.OK);
 	}
+	@Autowired
+	WorkShiftDao workShiftDao;
 } 
