@@ -100,10 +100,11 @@ Create a employee
 Body example
 ```json
 { 
-  name:"Eden",
-  surname:"Arreaza",
-  id_number: "1213"
+  "name":"Eden",
+  "surname":"Arreaza",
+  "id_number": "1213"
 }
+
 
 ```
 
@@ -157,3 +158,31 @@ Delete a employee
 `DELETE /employees/:id`
 
 Response http status 204
+
+### Create Work Shift
+
+Create a work shift
+
+`POST /workshifts/`
+
+
+Body example
+```json
+{ 
+  "dias":"lunes",
+  "hora_inicio":"08:00:00",
+  "hora_fin":"12:00:00"
+}
+
+
+
+```
+
+Body description
+
+Param | Type | Description
+------|------|------------
+id    | Long | Id of register
+dias  | String | 
+hora_inicio | Date | 
+hora_fin | Date | 
