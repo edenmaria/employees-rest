@@ -14,7 +14,6 @@ public interface WorkShiftDao extends CrudRepository<WorkShift, List> {
 				   "WHERE dias LIKE CONCAT('%',:dias,'%') "+ 
 				   "AND (hora_inicio LIKE CONCAT('%',cast(:hora_inicio as time),'%') OR length(hora_inicio) != 0) "+ 
 				   "AND (hora_fin LIKE CONCAT('%',cast(:hora_fin as time),'%') OR length(hora_fin) != 0)", nativeQuery = true)
-			   
 	public ArrayList<WorkShift> findWorkShift(@Param("dias") String dias,@Param("hora_inicio") String hora_inicio,@Param("hora_fin") String hora_fin);
     
 } 
