@@ -90,7 +90,7 @@ public class EmployeeController {
 				list.add(workshift);
 				employee.setWorkShifts(list);
 				employeeService.addEmployeeWorkshift(employee);
-				return new ResponseEntity<String>("Exitoso" , HttpStatus.OK);
+				return new ResponseEntity<String>("Exitoso" , HttpStatus.CREATED);
 			}
 			else{
 				return new ResponseEntity<String>("El horario ya esta asignado" , HttpStatus.OK);
