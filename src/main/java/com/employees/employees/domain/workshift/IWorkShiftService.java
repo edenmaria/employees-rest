@@ -7,6 +7,5 @@ public interface IWorkShiftService {
      boolean addWorkShift(WorkShift workshift);
      void updateWorkShift(WorkShift workshift);
      void deleteWorkShift(Long id);
-     //List<WorkShift> getWorkShiftByFilter(String dias, String hora_inicio, String hora_fin);
-     List<WorkShift> getWorkShiftByFilter(String dias, String hora_inicio);
+     List<WorkShift> getWorkShiftByFilter(String dias,String hora_inicio,String hora_fin);
 }

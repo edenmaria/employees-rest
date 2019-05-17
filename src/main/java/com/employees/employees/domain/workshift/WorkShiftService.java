@@ -38,11 +38,9 @@ public class WorkShiftService implements IWorkShiftService {
 	}
 
 	@Override
-	//public List<WorkShift> getWorkShiftByFilter(String dias, String hora_inicio, String hora_fin){
-	public List<WorkShift> getWorkShiftByFilter(String dias, String hora_inicio){
+	public List<WorkShift> getWorkShiftByFilter(String dias,String hora_inicio,String hora_fin){
 		List<WorkShift> list = new ArrayList<>();
-		//workShiftDao.findWorkShift(dias,hora_inicio,hora_fin).forEach(e -> list.add(e));
-		 workShiftDao.findWorkShift(dias,hora_inicio).forEach(e -> list.add(e));
+		workShiftDao.findWorkShift(dias,hora_inicio,hora_fin).forEach(e -> list.add(e));
 		return list;
 	}
 } 

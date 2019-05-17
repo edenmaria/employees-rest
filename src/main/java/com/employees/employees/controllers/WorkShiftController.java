@@ -63,10 +63,8 @@ public class WorkShiftController {
 	}	
 
 	@GetMapping("workshifts-filters/")
-	//public ResponseEntity<List<WorkShift>> getWorkShiftById(@PathVariable("dias") String dias, @PathVariable("hora_inicio") String hora_inicio, @PathVariable("hora_fin") String hora_fin) {
-	public ResponseEntity<List<WorkShift>> getWorkShiftById(@RequestParam String dias, String hora_inicio) {
-		//List<WorkShift> list = workshiftService.getWorkShiftByFilter(dias/*,hora_inicio,hora_fin*/);
-		List<WorkShift> list = workshiftService.getWorkShiftByFilter(dias,hora_inicio);
+	public ResponseEntity<List<WorkShift>> getWorkShiftByFilter(@RequestParam String dias,String hora_inicio,String hora_fin) {
+		List<WorkShift> list = workshiftService.getWorkShiftByFilter(dias,hora_inicio,hora_fin);
 		return new ResponseEntity<List<WorkShift>>(list, HttpStatus.OK);
 	}
 } 
