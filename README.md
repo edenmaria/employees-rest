@@ -376,7 +376,7 @@ workShifts | List | Work shifts associated with the employee
 
 Get work shifts filtering by day, start time and end time
 
-`GET /workshifts-filters/&dias=:dia&hora_inicio=:hora_inicio&hora_fin=:hora_fin
+`GET /workshifts-filters/?dias=:dia&hora_inicio=:hora_inicio&hora_fin=:hora_fin`
 
 Response example
 ```json
